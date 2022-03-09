@@ -1,0 +1,35 @@
+{% block body %}
+{% if g.client %}
+    <h1>{{g.client.name}}'s Profile</h1>
+    {% if not roomList %}
+        <p> No open rooms at the moment. </p>
+    {% else %}
+        {% for room in roomList %}
+            {% if g.client.memberID == room.member %}
+                <a href= "{{ url_for('main', roomID=room.roomID) }}">{{ room.roomTitle }}</a>
+                <form action="{{ url_for('deleteRoom') }}" method="post">
+                    <input type="hidden" name="roomID" value="{{ room.roomID }}">
+                <div class="actions"><input type="submit" value="Delete Room"></div><br>
+                </form>
+            {% else %}
+                <a href= "{{ url_for('main', roomID=room.roomID) }}">{{ room.roomTitle }}</a><br>
+            {% endif %}    
+        {% endfor %}
+    {% endif %}
+    <div>
+        <h1>Create New Room:</h1>
+        <form action="{{ url_for('newRoom') }}" method="post">
+            <input type="hidden" name = "memberID" value="{{ g.client.memberID }}">
+                <label for="roomTitle">Room Name:</label>
+                <input type="text" id = "roomTitle" name="roomTitle"><br>
+            <div class="actions"><input type="submit" value="Create New Room"></div>
+        </form>
+    </div>
+    <a href="{{ url_for('exit') }}">Sign Out</a>
+{% else %}
+    <a href="{{ url_for('enter') }}">Sign In</a>
+    <br><a href="{{ url_for('addUser') }}">Sign Up</a>  
+{% endif %}
+{% endblock %}
+
+{% extends "flash.html" %}

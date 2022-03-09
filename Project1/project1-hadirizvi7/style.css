@@ -1,0 +1,21 @@
+.green-box {
+	position: relative;
+	z-index: 2; 
+	background: lightgreen;
+	width: 20%;
+	left: 65%;
+	top: -25px;
+	height: 7em;
+	opacity: 0.9;
+  }
+
+  .red-box {
+	position: relative;
+	z-index: 2; 
+	background: red;
+	width: 20%;
+	left: 65%;
+	top: -25px;
+	height: 7em;
+	opacity: 0.9;
+  }

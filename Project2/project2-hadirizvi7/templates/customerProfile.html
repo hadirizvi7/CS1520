@@ -1,0 +1,47 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+	</div>
+  {% endif %}
+{% endwith %}
+
+{% block title %}
+{{ g.client.clientName}}'s Profile
+{% endblock %}
+
+{% block body %}
+<h1>Create New Event</h1>
+	<div>
+		<form action="{{ url_for('addEvent') }}" method="post">
+			<input type="hidden" name="clientID" value="{{ g.client.clientID }}">
+				<label for="eventName">Name:</label><br>
+				<input type="text" id = "eventName" name="eventName"><br>
+				<label for="date">Date:</label><br>
+  				<input type="date" id="date" name="date"><br><br>
+      		<div class="actions"><input type="submit" value="Create Next Event"></div>
+		</form>
+	</div>
+<h1>Events For {{g.client.clientName}}</h1>
+	<div>
+	{% for event in eventList %}
+		<p>Name: {{ event.eventName }}</p>
+		<p>Date: {{ event.date }}</p>
+		<form action="{{ url_for('removeEvent') }}" method="post">
+		<input type="hidden" name="eventID" value="{{ event.eventID }}">
+		<div class="actions"><input type="submit" value="Remove Event"></div>
+		</form>
+	{% else %}
+		<p>No Events For {{g.client.clientName}}</p>
+	{% endfor %}
+	</div>
+{% endblock %}
+
+<div class="page">
+    <div class="navigation">
+		<a href="{{ url_for('leave') }}">Sign Out (Customer View)</a>  
+	</div>
+</div>

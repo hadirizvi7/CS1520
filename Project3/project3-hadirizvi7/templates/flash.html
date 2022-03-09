@@ -1,0 +1,10 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}

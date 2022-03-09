@@ -1,0 +1,18 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<form method="post">
+  <label for="clientName">Username:</label><br>
+  <input type="text" id = "clientName" name="clientName" value="{{ request.form.clientName }}"><br>
+  <label for="password">Password:</label><br>
+  <input type="text" id="password" name="password"><br><br>
+  <input type="submit" value="Sign Up">
+</form> 

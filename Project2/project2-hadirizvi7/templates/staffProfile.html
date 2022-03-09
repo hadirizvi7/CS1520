@@ -1,0 +1,64 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+	</div>
+  {% endif %}
+{% endwith %}
+
+{% block title %}
+{{ g.client.clientName}}'s Profile
+{% endblock %}
+
+{% block body %}
+<h1>Open Events</h1>
+	<div>
+	{% for event in allEvents %}
+		<p>ID: {{ event.eventID }}</p>
+		<p>Name: {{ event.eventName }}</p>
+		<p>Date: {{ event.date }}</p>
+			{% if event.staffID1 == -1 %}
+				<form action="{{ url_for('addStaff') }}" method="post">
+					<input type="hidden" name="staffID1" value="{{ g.client.clientName }}">
+					<input type="hidden" name="eventID" value="{{ event.eventID }}">
+					<div class="actions"><input type="submit" value="Sign Up For Event"></div>
+				</form>
+			{% elif event.staffID2 == -1 %}
+				<form action="{{ url_for('addStaff') }}" method="post">
+					<input type="hidden" name="staffID2" value="{{ g.client.clientName }}">
+					<input type="hidden" name="eventID" value="{{ event.eventID }}">
+					<div class="actions"><input type="submit" value="Sign Up For Event"></div>
+				</form>
+			{% elif event.staffID3 == -1 %}
+				<form action="{{ url_for('addStaff') }}" method="post">
+					<input type="hidden" name="staffID3" value="{{ g.client.clientName }}">
+					<input type="hidden" name="eventID" value="{{ event.eventID }}">
+					<div class="actions"><input type="submit" value="Sign Up For Event"></div>
+				</form>
+			{% else %}
+			{% endif %}
+	{% else %}
+		<p>No Events Available Yet</p>
+	{% endfor %}
+	</div>
+
+<h1>Your Events</h1>
+	<div>
+	{% for event in assignedEvents %}
+		<br><p>ID: {{ event.eventID }}</p>
+		<p>Name: {{ event.eventName }}</p>
+		<p>Date: {{ event.date }}</p>
+	{% else %}
+		<p>No Events Currently Assigned To You.</p>
+	{% endfor %}
+	</div>
+{% endblock %}
+
+<div>
+    <div>
+		<a href="{{ url_for('leave') }}">Sign Out (Staff View)</a>
+	</div>
+</div>

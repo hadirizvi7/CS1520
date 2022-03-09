@@ -1,0 +1,34 @@
+<h1>Room: {{room.roomTitle}}</h1>
+
+{% block body %}
+    <div>
+        <p>Enter Message Here:</p>
+        <form>
+            <input type = "hidden" id = "user" value = "{{g.client.name}}">
+            <input type = "hidden" id="chatTitle" value = "{{room.roomTitle}}">
+            <input type = "text" id = "content">
+            <input id = "button" type = "button" value = "Post Message">
+        </form>
+    </div>
+
+    <div id = "messageList">
+        <p>Existing Messages:</p>
+        {% if not messageList %}
+            <p>No New Messages</p>
+        {% else %}
+            {% for msg in messageList %}
+                <p>{{msg.displayTime}}: {{msg.content}} ({{msg.user}})</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
+
+<div>
+	<a href="{{ url_for('profile') }}">Back to {{g.client.name}}'s Profile</a>  
+</div>
+
+{% extends "flash.html" %}

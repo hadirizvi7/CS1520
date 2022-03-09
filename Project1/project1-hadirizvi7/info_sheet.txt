@@ -1,0 +1,50 @@
+===================================
+CS1520 Assignment Information Sheet
+-----------------------------------
+
+You must submit an information sheet with every assignment. Also be sure
+to submit all materials following the procedures described on the
+submission procedures page.
+
+Name: Syed Rizvi
+
+Lecture section: Mon/Wed (3pm - 4:15pm)
+
+Recitation day and time:  Fri 3pm
+
+Assignment #: 1
+
+Program due date: 10/3 @ 11:59pm
+
+Handed in date: 10/2
+
+Source code file name(s):
+battleship.html
+game.js
+style.css
+
+
+
+
+Other file name(s) (if relevant):
+
+
+
+
+Does your project run without error?:
+Yes
+If not, what is/are the error(s) and which parts of your program run
+correctly?:
+N/A
+
+
+
+
+Additional comments to the grader:
+N/A
+
+
+
+
+
+

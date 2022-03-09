@@ -1,0 +1,26 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+      {{ message }}<br>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div>
+    <div>
+    {% if not g.client %}
+      <a href="{{ url_for('login') }}">Sign In (Owner/Staff/Customer)</a>
+      <br><a href="{{ url_for('addUser') }}">Sign Up (Customer)</a>
+    {% elif g.client.view == 'owner' %}
+      <a href="{{ url_for('addUser') }}">Create Accounts For Staff</a> 
+      <br><a href="{{ url_for('leave') }}">Sign Out (Owner Account)</a>  
+    {% elif g.client.view == 'staff' %} 
+      <a href="{{ url_for('leave') }}">Sign Out (Staff Account)</a>
+    {% elif g.client.view == 'customer' %} 
+      <a href="{{ url_for('leave') }}">Sign Out (Customer Account)</a>  
+    {% endif %}
+    </div>
+</div>

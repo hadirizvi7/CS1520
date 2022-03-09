@@ -1,0 +1,53 @@
+<!-- flashing logic from https://flask.palletsprojects.com/en/2.0.x/patterns/flashing/-->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=flashes>
+    {% for message in messages %}
+	{{ message }}<br>
+    {% endfor %}
+	</div>
+  {% endif %}
+{% endwith %}
+
+{% block title %}
+{{ g.client.clientName}}'s Profile
+{% endblock %}
+
+<h1>Scheduled Events</h1>
+{% block body %}
+	<div>
+	{% for event in eventList %}
+		<br><p>ID: {{ event.eventID }}</p>
+		<p>Name: {{ event.eventName }}</p>
+		<p>Date: {{ event.date }}</p>
+		{% if event.staffID1 == -1 and event.staffID2 == -1 and event.staffID3 == -1 %}
+			<p>No Staff For {{ event.eventName }}</p>
+		{% else %}
+			{% if event.staffID1 != -1 %}
+				<p>Staff ID: {{ event.staffID1 }}</p>
+			{% else %}
+				<p>Staff ID: n/a</p>
+			{% endif %}
+			{% if event.staffID2 != -1 %}
+				<p>Staff ID: {{ event.staffID2 }}</p>
+			{% else %}
+				<p>Staff ID: n/a</p>
+			{% endif %}
+			{% if event.staffID3 != -1 %}
+				<p>Staff ID: {{ event.staffID3 }}</p>
+			{% else %}
+				<p>Staff ID: n/a</p>
+			{% endif %}
+		{% endif %}
+	{% else %}
+		<p>No Events Scheduled Yet.</p>
+	{% endfor %}
+	</div>
+{% endblock %}
+
+<div>
+    <div>
+      <a href="{{ url_for('addUser') }}">Staff Account Creation</a>
+      <br><a href="{{ url_for('leave') }}">Sign Out (Owner View)</a>  
+	</div>
+</div>
